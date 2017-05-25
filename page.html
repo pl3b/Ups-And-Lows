@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+<script>
+    function print(characterCode)
+    {
+        var row = document.createElement("tr");
+        var code = document.createElement("td");
+        var original = document.createElement("td");
+        var lowCase = document.createElement("td");
+        var uppCase = document.createElement("td");
+        var character = String.fromCharCode(characterCode);
+
+        console.log("Code: ->" + characterCode + "<-\n");
+        code.appendChild(document.createTextNode(characterCode));
+
+        console.log("Original: ->" + character + "<-\n");
+        original.appendChild(document.createTextNode(character));
+
+        console.log("ToUpper: ->" + character.toUpperCase() + "<-\n");
+        lowCase.appendChild(document.createTextNode(character.toLowerCase()));
+
+        console.log("ToLower: ->" + character.toLowerCase() + "<-\n");
+        uppCase.appendChild(document.createTextNode(character.toUpperCase()));
+
+        document.getElementById("charResults").appendChild(row);
+        row.appendChild(code);
+        row.appendChild(original);
+        row.appendChild(lowCase);
+        row.appendChild(uppCase);
+    }
+
+    function printChar(char)
+    {
+        print(char.value.charCodeAt(0));
+    }
+    
+    function printInRange(low, high)
+    {
+        var range = Array.from(new Array((parseInt(high.value, 16)+1)-parseInt(low.value, 16)), (x,i) => i + parseInt(low.value, 16));
+        range.forEach(print)
+    }
+  </script>
+</head>
+<body>
+
+    <h1>Convert Character</h1>
+
+    <form  name="testCharacter">
+        Character: <input type="text" name="char" value="a">
+        <input type="button" value="submit" onclick="printChar(char)">
+    </form>
+
+    <h1>Convert Range of Characters</h1>
+
+    <form name="testRange">
+        Lower End: <input type="text", name="low" value="0000"><br>
+        Higher End: <input type="text", name="high" value="ffff"><br>
+        <input type="button" value="submit" onclick="printInRange(low, high)">
+    </form>
+
+    <table id="charResults" border="1">
+        <tr>
+            <th>Code</th>
+            <th>Original</th>
+            <th>Lower Case</th>
+            <th>Upper Case</th>
+        </tr>
+    </table>
+</body>
