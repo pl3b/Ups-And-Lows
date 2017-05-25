@@ -22,11 +22,25 @@
         console.log("ToLower: ->" + character.toLowerCase() + "<-\n");
         uppCase.appendChild(document.createTextNode(character.toUpperCase()));
 
-        document.getElementById("charResults").appendChild(row);
-        row.appendChild(code);
-        row.appendChild(original);
-        row.appendChild(lowCase);
-        row.appendChild(uppCase);
+        if(!document.getElementById("mutations"))
+        {
+            document.getElementById("charResults").appendChild(row);
+            row.appendChild(code);
+            row.appendChild(original);
+            row.appendChild(lowCase);
+            row.appendChild(uppCase);
+        }
+        else
+        {
+            if(document.getElementById("mutations").checked && (character !== character.toLowerCase() || character !== character.toUpperCase()))
+            {
+                document.getElementById("charResults").appendChild(row);
+                row.appendChild(code);
+                row.appendChild(original);
+                row.appendChild(lowCase);
+                row.appendChild(uppCase);
+            }
+        }
     }
 
     function printChar(char)
@@ -57,6 +71,11 @@
         Higher End: <input type="text", name="high" value="ffff"><br>
         <input type="button" value="submit" onclick="printInRange(low, high)">
     </form>
+
+    <h1>Filters</h1>
+    Show Mutations Only: <input type="checkbox" id="mutations">
+
+    <h1>Results</h1>
 
     <table id="charResults" border="1">
         <tr>
