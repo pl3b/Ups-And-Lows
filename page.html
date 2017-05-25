@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <script>
+    var filterVal = 1;
     function print(characterCode)
     {
         var row = document.createElement("tr");
@@ -22,7 +23,7 @@
         console.log("ToLower: ->" + character.toLowerCase() + "<-\n");
         uppCase.appendChild(document.createTextNode(character.toUpperCase()));
 
-        switch(document.getElementById("filters").value)
+        switch(filterVal)
         {
             case 1: 
                     document.getElementById("charResults").appendChild(row);
@@ -66,11 +67,13 @@
 
     function printChar(char)
     {
+        filterVal = 1;
         print(char.value.charCodeAt(0));
     }
     
     function printInRange(low, high)
     {
+        filterVal = parseInt(document.getElementById("filters").value);
         var range = Array.from(new Array((parseInt(high.value, 16)+1)-parseInt(low.value, 16)), (x,i) => i + parseInt(low.value, 16));
         range.forEach(print)
     }
