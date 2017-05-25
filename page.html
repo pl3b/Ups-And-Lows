@@ -22,24 +22,45 @@
         console.log("ToLower: ->" + character.toLowerCase() + "<-\n");
         uppCase.appendChild(document.createTextNode(character.toUpperCase()));
 
-        if(!document.getElementById("mutations"))
+        switch(document.getElementById("filters").value)
         {
-            document.getElementById("charResults").appendChild(row);
-            row.appendChild(code);
-            row.appendChild(original);
-            row.appendChild(lowCase);
-            row.appendChild(uppCase);
-        }
-        else
-        {
-            if(document.getElementById("mutations").checked && (character !== character.toLowerCase() || character !== character.toUpperCase()))
-            {
-                document.getElementById("charResults").appendChild(row);
-                row.appendChild(code);
-                row.appendChild(original);
-                row.appendChild(lowCase);
-                row.appendChild(uppCase);
-            }
+            case 1: 
+                    document.getElementById("charResults").appendChild(row);
+                    row.appendChild(code);
+                    row.appendChild(original);
+                    row.appendChild(lowCase);
+                    row.appendChild(uppCase);
+                break;
+            case 2: 
+                    if(character !== character.toLowerCase())
+                    {
+                        document.getElementById("charResults").appendChild(row);
+                        row.appendChild(code);
+                        row.appendChild(original);
+                        row.appendChild(lowCase);
+                        row.appendChild(uppCase);
+                    }
+                break;
+            case 3: 
+                    if(character !== character.toUpperCase())
+                    {
+                        document.getElementById("charResults").appendChild(row);
+                        row.appendChild(code);
+                        row.appendChild(original);
+                        row.appendChild(lowCase);
+                        row.appendChild(uppCase);
+                    }
+                break;
+            case 4:
+                    if(character !== character.toUpperCase() && character !== character.toLowerCase())
+                    {
+                        document.getElementById("charResults").appendChild(row);
+                        row.appendChild(code);
+                        row.appendChild(original);
+                        row.appendChild(lowCase);
+                        row.appendChild(uppCase);
+                    }
+                break;
         }
     }
 
@@ -73,7 +94,12 @@
     </form>
 
     <h1>Filters</h1>
-    Show Mutations Only: <input type="checkbox" id="mutations">
+    <select id="filters">
+        <option value="1">Nothing Different</option>
+        <option value="2">Different Lower Case</option>
+        <option value="3">Different Upper Case</option>
+        <option value="4">Everything Different</option>
+    </select>
 
     <h1>Results</h1>
 
